@@ -2,7 +2,8 @@
 """Factorize as many numbers as possible into
 a product of two smaller numbers"""
 
-import sys
+from sys import argv
+from math import sqrt
 
 
 def funct():
@@ -13,18 +14,18 @@ def funct():
         with open(revfile) as f:
             for revnumber in f:
                 revnumber = int(revnumber)
+                print("{:d}=".format(revnumber), end="")
                 if revnumber % 2 == 0:
-                    print("{}={}*{}".format(revnumber, revnumber // 2, 2))
+                    print("{}={}*{}".format(revnumber, revnumber // 2))
                     continue
-                i = 3
-                while i < revnumber // 2:
+                tmp = int(sqrt(revnumber))
+                if tmp % 2 == 0:
+                    tmp += 1
+                for i in range(3, tmp + 1, 2):
                     if revnumber % i == 0:
-                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        print("{}*{}".format(revnumber // i, i))
                         break
-                    i = i + 2
-                if i == (revnumber // 2) + 1:
-                    print("{}={}*{}".format(revnumber, revnumber, 1))
-    excecept IndexError:
+    except IndexError:
         pass
 
 
